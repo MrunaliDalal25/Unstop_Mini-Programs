@@ -1,0 +1,45 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+import java.io.*;
+import java.util.*;
+
+class Main {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int N = sc.nextInt();
+        sc.nextLine();
+
+        String[] arr = new String[N];
+        HashMap<String, Integer> freq = new HashMap<>();
+
+        for (int i = 0; i < N; i++) {
+            arr[i] = sc.nextLine();
+            freq.put(arr[i], freq.getOrDefault(arr[i], 0) + 1);
+        }
+
+        int k = sc.nextInt();
+
+        int count = 0;
+
+        // Find kth distinct string
+        for (String str : arr) {
+            if (freq.get(str) == 1) {
+                count++;
+
+                if (count == k) {
+                    System.out.println(str);
+                    return;
+                }
+            }
+        }
+
+        // If less than k distinct strings
+        System.out.println(-1);
+    }
+}
