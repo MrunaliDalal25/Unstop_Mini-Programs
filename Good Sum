@@ -1,0 +1,62 @@
+import java.util.*;
+
+public class Main {
+
+    public static int goodSum(int N, int[] A) {
+
+        Stack<Integer> stack = new Stack<>();
+
+        long totalSum = 0;
+
+        for (int i = 0; i < N; i++) {
+
+            int x = A[i];
+
+            // Positive number
+            if (x >= 0) {
+
+                stack.push(x);
+                totalSum += x;
+            }
+
+            // Negative number
+            else {
+
+                int need = Math.abs(x);
+                int removedSum = 0;
+
+                // Remove minimum elements from end
+                while (!stack.isEmpty() && removedSum < need) {
+
+                    int val = stack.pop();
+
+                    removedSum += val;
+                    totalSum -= val;
+                }
+
+                // Add absolute value
+                stack.push(need);
+                totalSum += need;
+            }
+        }
+
+        return (int) totalSum;
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        int N = sc.nextInt();
+
+        int[] A = new int[N];
+
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+
+        System.out.println(goodSum(N, A));
+
+        sc.close();
+    }
+}
