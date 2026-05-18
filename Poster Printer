@@ -1,0 +1,72 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+class Main {
+
+    static boolean possible(String s) {
+
+        int n = s.length();
+        int i = 0;
+
+        while (i < n) {
+
+            // Skip white cells
+            if (s.charAt(i) == 'W') {
+                i++;
+                continue;
+            }
+
+            int b = 0;
+            int r = 0;
+
+            // Process one colored segment
+            while (i < n && s.charAt(i) != 'W') {
+
+                if (s.charAt(i) == 'B') {
+                    b++;
+                } else {
+                    r++;
+                }
+
+                i++;
+            }
+
+            // Invalid if only one color exists
+            if (b == 0 || r == 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        int T = sc.nextInt();
+
+        while (T-- > 0) {
+
+            int N = sc.nextInt();
+            String s = sc.next();
+
+            System.out.println(possible(s) ? "YES" : "NO");
+        }
+
+        sc.close();
+    }
+}
+
+
+
+
+
+
+
+
+
+    
